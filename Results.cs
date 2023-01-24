@@ -1,19 +1,19 @@
 ﻿using OpenQA.Selenium;
-using System.Collections.Generic;
+
 
 namespace AmazonAutomation
 {
     public class Results
     {
         IWebDriver driver;
-        string xPath;
+
         public Results(IWebDriver driver) {
             this.driver = driver;
         }
 
-        public List<Item> getResultsBy(Dictionary<string, string> filterDictionary)
+/*        public List<Item> getResultsBy(Dictionary<string, string> filterDictionary)
         {
-            this.xPath = "//span[@class=\"a-price-whole\" ";
+            string xPath = "//span[@class=\"a-price-whole\" ";
             foreach (var filter in filterDictionary)
             {
                 switch (filterDictionary[filter.Key]) {
@@ -25,11 +25,9 @@ namespace AmazonAutomation
                         break;
                 }
             }
-
             IList<IWebElement> elements = driver.FindElements(By.XPath(xPath));
             //// to continues...
             return elements;
-        }
-
+        }*/
     }
 }

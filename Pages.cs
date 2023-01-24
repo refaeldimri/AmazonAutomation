@@ -1,22 +1,38 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AmazonAutomation
 {
     public class Pages
     {
-        IWebDriver driver;
-        public HomePage homePage;
+        private IWebDriver driver;
+        public Home home;
         public SearchBar searchBar;
         public Pages(IWebDriver driver)
         {
             this.driver = driver;
-            this.homePage = new HomePage(driver);
-            this.searchBar = new SearchBar(driver);
+        }
+        public Home Home
+        {
+            get
+            {
+                if (this.home == null)
+                {
+                    home = new Home(driver);
+                }
+                return this.home;
+            }
+        }
+        public SearchBar SearchBar
+        {
+            get
+            {
+                if (this.searchBar == null)
+                {
+                    searchBar = new SearchBar(driver);
+                }
+                return this.searchBar;
+            }
         }
     }
 }
