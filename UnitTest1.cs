@@ -1,5 +1,4 @@
-using OpenQA.Selenium;
-using AmazonAutomation;
+
 
 namespace AmazonAutomation
 {
@@ -13,7 +12,7 @@ namespace AmazonAutomation
         {
             browserFactory = new BrowserFactory();
             filterDictionary.Add("Price_Lower_Then", "100");
-            filterDictionary.Add("Price_Hiegher_OR_Equal_Then", "50");
+            filterDictionary.Add("Price_Higher_OR_Equal_Then", "50");
             filterDictionary.Add("Free_Shipping", "true");
         }
 
