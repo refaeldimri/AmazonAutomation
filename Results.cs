@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Security.Claims;
 
 
 namespace AmazonAutomation
@@ -12,7 +11,7 @@ namespace AmazonAutomation
             this.driver = driver;
         }
 
-        public IList<IWebElement> getResultsBy(Dictionary<string, string> filterDictionary)
+        public List<IWebElement> getResultsBy(Dictionary<string, string> filterDictionary)
         {
             string xPath = "//div[@class='a-section a-spacing-small a-spacing-top-small'";
             
@@ -30,7 +29,7 @@ namespace AmazonAutomation
                         break;
                 }
             }
-            IList<IWebElement> elements = driver.FindElements(By.XPath(xPath));
+            List <IWebElement> elements = driver.FindElements(By.XPath(xPath)).ToList();
             return elements;
             
         }

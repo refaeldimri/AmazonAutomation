@@ -7,7 +7,7 @@ namespace AmazonAutomation
     {
         private IWebDriver driver;
         public Home home;
-        public SearchBar searchBar;
+        public Results result;
         public Pages(IWebDriver driver)
         {
             this.driver = driver;
@@ -23,15 +23,15 @@ namespace AmazonAutomation
                 return this.home;
             }
         }
-        public SearchBar SearchBar
+        public Results Results
         {
             get
             {
-                if (this.searchBar == null)
+                if (this.result == null)
                 {
-                    searchBar = new SearchBar(driver);
+                    result = new Results(driver);
                 }
-                return this.searchBar;
+                return this.result;
             }
         }
     }
