@@ -10,12 +10,14 @@ namespace AmazonAutomation
         Amazon amazon;
         Dictionary<string, string> filterDictionary = new Dictionary<string, string>();
         List<IWebElement> elementsList;
+        List<Item> itemsList;
+
         [SetUp]
         public void Setup()
         {
             browserFactory = new BrowserFactory();
             filterDictionary.Add("Price_Lower_Then", "100");
-            filterDictionary.Add("Price_Higher_OR_Equal_Then", "1");
+            filterDictionary.Add("Price_Higher_OR_Equal_Then", "10");
             filterDictionary.Add("Free_Shipping", "true");
             elementsList = new List<IWebElement>();
         }
@@ -27,12 +29,7 @@ namespace AmazonAutomation
             amazon = new Amazon(browserFactory.Drivers["CHROME"]);
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
-            elementsList = amazon.Pages.Results.getResultsBy(filterDictionary);
-
-            foreach (IWebElement element in elementsList)
-            {
-                Console.WriteLine(element.Text + "\n\n\n\n");
-            }
+            itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
         }
         [Test]
         public void TestExploror()
@@ -41,6 +38,7 @@ namespace AmazonAutomation
             amazon = new Amazon(browserFactory.Drivers["IE"]);
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
+            itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
         }
         [Test]
         public void TestFireFox()
@@ -49,6 +47,9 @@ namespace AmazonAutomation
             amazon = new Amazon(browserFactory.Drivers["FIREFOX"]);
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
+            itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
+            Console.WriteLine(itemsList.Count);
+            Console.WriteLine(itemsList[0].Title);
         }
     }
 }
