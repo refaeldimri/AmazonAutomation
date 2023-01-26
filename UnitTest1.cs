@@ -12,6 +12,19 @@ namespace AmazonAutomation
         List<IWebElement> elementsList;
         List<Item> itemsList;
 
+        public void printResults(List<Item> listItems)
+        {
+            string strToPrint = listItems.Count > 1 ? "there are " + listItems.Count + " items:\n": 
+                                                        "there is " + listItems.Count + " item:\n";
+            Console.WriteLine("there are " + listItems.Count + " items:\n");
+            foreach (Item item in itemsList)
+            {
+                Console.WriteLine("Product name: " + item.Title);
+                Console.WriteLine("Product price: " + item.Price);
+                Console.WriteLine("Product link: " + item.Link + "\n\n");
+            }
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -30,10 +43,7 @@ namespace AmazonAutomation
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
             itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
-            Console.WriteLine(itemsList.Count);
-            Console.WriteLine(itemsList[0].Title);
-            Console.WriteLine(itemsList[0].Price);
-            Console.WriteLine(itemsList[0].Link);
+            printResults(itemsList);
         }
         [Test]
         public void TestExploror()
@@ -43,6 +53,7 @@ namespace AmazonAutomation
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
             itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
+            printResults(itemsList);
         }
         [Test]
         public void TestFireFox()
@@ -52,8 +63,7 @@ namespace AmazonAutomation
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
             itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
-            Console.WriteLine(itemsList.Count);
-            Console.WriteLine(itemsList[0].Title);
+            printResults(itemsList);
         }
     }
 }

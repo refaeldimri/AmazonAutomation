@@ -14,6 +14,8 @@ namespace AmazonAutomation
 
         public List<Item> getResultsBy(Dictionary<string, string> filterDictionary)
         {
+            if(filterDictionary.Count== 0) return null;
+
             string xPath = "//div[@class='a-section a-spacing-small a-spacing-top-small'";
             
             foreach (var filter in filterDictionary)
@@ -53,36 +55,4 @@ namespace AmazonAutomation
             return itemsList;  
         } 
     }
-
-    /*
-     
-
-    "//div[@class='a-section a-spacing-small a-spacing-top-small'"
-    " and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class='a-price-decimal']), descendant::span[@class='a-price-fraction']) > 10"
-    " and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class='a-price-decimal']), descendant::span[@class='a-price-fraction'])<100"
-    " and descendant::span[contains(text(), 'FREE')]]"
-
-
-
-
-
-    
-    
-    
-    //div[@class="a-section a-spacing-small a-spacing-top-small" and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class="a-price-decimal"]), descendant::span[@class='a-price-fraction']) > 50 and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class="a-price-decimal"]), descendant::span[@class='a-price-fraction'])<100 and descendant::span[contains(text(), 'FREE')]]
-    
-    
-    
-    
-    
-    //div[@class='a-section a-spacing-small a-spacing-top-small' and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class='a-price-decimal']), descendant::span[@class='a-price-fraction']) > 100 and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class='a-price-decimal']), descendant::span[@class='a-price-fraction'])<10 and descendant::span[contains(text(), 'FREE')]]
-
-
-
-
-
-     
-     
-     
-     */
 }
