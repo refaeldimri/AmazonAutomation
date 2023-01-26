@@ -42,14 +42,12 @@ namespace AmazonAutomation
 
             foreach (IWebElement element in elementsFromAmazon)
             {
-                string title = element.FindElement(By.CssSelector(".a-size-medium.a-color-base.a-text-normal")).Text;
+                string title = element.FindElement(By.XPath(".//span[@class='a-size-medium a-color-base a-text-normal']")).Text;
 
-                string price = "$" + element.FindElement(By.CssSelector(".a-price-whole")).Text + "." +
-                               element.FindElement(By.CssSelector(".a-price-fraction")).Text;
-                string link = "";
-                 /*   element.FindElement
-                    (By.XPath("//a[(@class=\"a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal\")]"));
-               */
+                string price = "$" + element.FindElement(By.XPath(".//span[@class='a-price-whole']")).Text + "." +
+                               element.FindElement(By.XPath("//span[@class='a-price-fraction']")).Text;
+                var link = 
+                    element.FindElement(By.XPath("//a[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']")).GetAttribute("href");
                 this.itemsList.Add(new Item(title, price, link));
             }
             return itemsList;  
@@ -68,8 +66,20 @@ namespace AmazonAutomation
 
 
 
-    //div[@class="a-section a-spacing-small a-spacing-top-small" and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class="a-price-decimal"]), descendant::span[@class='a-price-fraction']) > 50 and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class="a-price-decimal"]), descendant::span[@class='a-price-fraction'])<100 and descendant::span[contains(text(), 'FREE')] ]
+    
+    
+    
+    //div[@class="a-section a-spacing-small a-spacing-top-small" and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class="a-price-decimal"]), descendant::span[@class='a-price-fraction']) > 50 and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class="a-price-decimal"]), descendant::span[@class='a-price-fraction'])<100 and descendant::span[contains(text(), 'FREE')]]
+    
+    
+    
+    
+    
     //div[@class='a-section a-spacing-small a-spacing-top-small' and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class='a-price-decimal']), descendant::span[@class='a-price-fraction']) > 100 and concat(concat(descendant::span[@class='a-price-whole'], descendant::span[class='a-price-decimal']), descendant::span[@class='a-price-fraction'])<10 and descendant::span[contains(text(), 'FREE')]]
+
+
+
+
 
      
      

@@ -30,6 +30,10 @@ namespace AmazonAutomation
             amazon.Pages.Home.SearchBar.Text = "mouse";
             amazon.Pages.Home.SearchBar.Click();
             itemsList = amazon.Pages.Results.getResultsBy(filterDictionary);
+            Console.WriteLine(itemsList.Count);
+            Console.WriteLine(itemsList[0].Title);
+            Console.WriteLine(itemsList[0].Price);
+            Console.WriteLine(itemsList[0].Link);
         }
         [Test]
         public void TestExploror()
