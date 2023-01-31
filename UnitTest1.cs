@@ -1,6 +1,5 @@
-
-
 using OpenQA.Selenium;
+
 
 namespace AmazonAutomation
 {
@@ -16,7 +15,7 @@ namespace AmazonAutomation
         {
             string strToPrint = listItems.Count > 1 ? "there are " + listItems.Count + " items:\n": 
                                                         "there is " + listItems.Count + " item:\n";
-            Console.WriteLine("there are " + listItems.Count + " items:\n");
+            Console.WriteLine(strToPrint);
             foreach (Item item in itemsList)
             {
                 Console.WriteLine("Product name: " + item.Title);
@@ -31,7 +30,7 @@ namespace AmazonAutomation
             browserFactory = new BrowserFactory();
             filterDictionary.Add("Price_Lower_Then", "100");
             filterDictionary.Add("Price_Higher_OR_Equal_Then", "10");
-            filterDictionary.Add("Free_Shipping", "true");
+            filterDictionary.Add("Free_Shipping", "false");
             elementsList = new List<IWebElement>();
         }
 

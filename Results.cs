@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 
-
 namespace AmazonAutomation
 {
     public class Results
@@ -14,10 +13,7 @@ namespace AmazonAutomation
 
         public List<Item> getResultsBy(Dictionary<string, string> filterDictionary)
         {
-            if(filterDictionary.Count== 0) return null;
-
-            string xPath = "//div[@class='a-section a-spacing-small a-spacing-top-small'";
-            
+            string xPath = "//div[@class='a-section a-spacing-small a-spacing-top-small'";    
             foreach (var filter in filterDictionary)
             {
                 switch (filter.Key) {
@@ -35,11 +31,14 @@ namespace AmazonAutomation
                         break;
                     case "Free_Shipping":
                         if (filter.Value == "true") 
-                            xPath += " and descendant::span[contains(text(), 'FREE')]]";
+                            xPath += " and descendant::span[contains(text(), 'FREE')]";
+                        else if (filter.Value == "false")
+                            xPath += " and descendant::span[not(contains(text(), 'FREE'))]";
                         break;
                 }
             }
-            
+
+            xPath += "]";
             IList<IWebElement> elementsFromAmazon = driver.FindElements(By.XPath(xPath));
 
             foreach (IWebElement element in elementsFromAmazon)
@@ -47,7 +46,7 @@ namespace AmazonAutomation
                 string title = element.FindElement(By.XPath(".//span[@class='a-size-medium a-color-base a-text-normal']")).Text;
 
                 string price = "$" + element.FindElement(By.XPath(".//span[@class='a-price-whole']")).Text + "." +
-                               element.FindElement(By.XPath("//span[@class='a-price-fraction']")).Text;
+                               element.FindElement(By.XPath(".//span[@class='a-price-fraction']")).Text;
                 var link = 
                     element.FindElement(By.XPath("//a[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']")).GetAttribute("href");
                 this.itemsList.Add(new Item(title, price, link));
